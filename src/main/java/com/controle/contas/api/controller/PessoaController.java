@@ -1,7 +1,6 @@
 package com.controle.contas.api.controller;
 
-import java.util.List;
-
+import org.modelmapper.Conditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +14,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.controle.contas.api.entity.Pessoa;
-import com.controle.contas.api.request.PessoaRequest;
+import com.controle.contas.api.request.PessoaFisicaRequest;
+import com.controle.contas.api.request.PessoaJuridicaRequest;
+import com.controle.contas.api.response.PessoaFisicaResponse;
+import com.controle.contas.api.response.PessoaJuridicaResponse;
 import com.controle.contas.api.response.PessoaResponse;
 import com.controle.contas.api.service.PessoaService;
 import com.controle.contas.api.utils.MapperConfiguration;
@@ -34,25 +36,39 @@ public class PessoaController {
 	private PessoaService _pessoaService;
 	
 	@GetMapping
-	public List<PessoaResponse> Listar()
+	public PessoaResponse Listar()
 	{
-		var domain = _pessoaService.Listar();
-		return _mapper.mapList(domain, PessoaResponse.class);
+		var pessoasFisicas = _pessoaService.ListarPessoasFisicas();
+		var pessoasJuridicas = _pessoaService.ListarPessoasJuridicas();
+		
+		var response = new PessoaResponse(
+				_mapper.mapList(pessoasFisicas, PessoaFisicaResponse.class),
+				_mapper.mapList(pessoasJuridicas, PessoaJuridicaResponse.class));
+		
+		return response;
 	}
 	
-	@PostMapping
+	@PostMapping(value = "/pessoaFisica")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public PessoaResponse Incluir(@RequestBody PessoaRequest request) {
+	public PessoaFisicaResponse IncluirPessoaFisica(@RequestBody PessoaFisicaRequest request) {
 		var domain = _mapper.map(request, Pessoa.class);
-		var result = _pessoaService.Incluir(domain);
-		return _mapper.map(result, PessoaResponse.class);
+		var result = _pessoaService.IncluirPessoaFisica(domain);
+		return _mapper.map(result, PessoaFisicaResponse.class);
+	}
+	
+	@PostMapping(value = "/pessoaJuridica")
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public PessoaJuridicaResponse IncluirPessoaJuridica(@RequestBody PessoaJuridicaRequest request) {
+		var domain = _mapper.map(request, Pessoa.class);
+		var result = _pessoaService.IncluirPessoaJuridica(domain);
+		return _mapper.map(result, PessoaJuridicaResponse.class);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public PessoaResponse Editar(@RequestBody PessoaRequest request, @PathVariable("id") Integer id) {
+	public PessoaJuridicaResponse Editar(@RequestBody PessoaJuridicaRequest request, @PathVariable("id") Integer id) {
 		var domain = _mapper.map(request, Pessoa.class);
 		var result = _pessoaService.Editar(id, domain);
-		return _mapper.map(result, PessoaResponse.class);
+		return _mapper.map(result, PessoaJuridicaResponse.class);
 	}
 	
 	@DeleteMapping(value = "/{id}")

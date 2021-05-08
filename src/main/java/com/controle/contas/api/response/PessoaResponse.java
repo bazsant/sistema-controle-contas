@@ -1,65 +1,33 @@
 package com.controle.contas.api.response;
 
-import java.util.Date;
-
-import com.controle.contas.api.enums.TipoPessoa;
+import java.util.List;
 
 public class PessoaResponse {
-	private Integer id;
-	private String cnpj;
-	private String razaoSocial;
-	private String nomeFantasia;
-	private String cpf;
-	private String nomeCompleto;
-	private Date dataNascimento;
-	private TipoPessoa tipoPessoa;
+	private List<PessoaFisicaResponse> pessoasFisicas;
+	private List<PessoaJuridicaResponse> pessoasJuridicas;
 	
-	public Integer getId() {
-		return id;
+	public PessoaResponse() { }	
+
+	public PessoaResponse(List<PessoaFisicaResponse> pessoasFisicas, List<PessoaJuridicaResponse> pessoasJuridicas) {
+		this.pessoasFisicas = pessoasFisicas;
+		this.pessoasJuridicas = pessoasJuridicas;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+
+	public List<PessoaFisicaResponse> getPessoasFisicas() {
+		return pessoasFisicas;
 	}
-	public String getCnpj() {
-		return cnpj;
+
+	public void setPessoasFisicas(List<PessoaFisicaResponse> pessoasFisicas) {
+		this.pessoasFisicas = pessoasFisicas;
 	}
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+
+	public List<PessoaJuridicaResponse> getPessoasJuridicas() {
+		return pessoasJuridicas;
 	}
-	public String getRazaoSocial() {
-		return razaoSocial;
+
+	public void setPessoasJuridicas(List<PessoaJuridicaResponse> pessoasJuridicas) {
+		this.pessoasJuridicas = pessoasJuridicas;
 	}
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
-	public String getNomeFantasia() {
-		return nomeFantasia;
-	}
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
-	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	public String getNomeCompleto() {
-		return nomeCompleto;
-	}
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
-	}
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-	public TipoPessoa getTipoPessoa() {
-		return tipoPessoa;
-	}
-	public void setTipoPessoa(TipoPessoa tipoPessoa) {
-		this.tipoPessoa = tipoPessoa;
-	}	
+	
+	
 }

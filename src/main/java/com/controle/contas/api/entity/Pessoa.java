@@ -23,17 +23,7 @@ public class Pessoa {
 	private Date dataNascimento;
 			
 	public Pessoa() {}
-	public Pessoa(Integer id, TipoPessoa tipoPessoa, String cnpj, String razaoSocial, String nomeFantasia, String cpf,
-			String nomeCompleto, Date dataNascimento) {
-		this.id = id;
-		this.tipoPessoa = tipoPessoa;
-		this.cnpj = cnpj;
-		this.razaoSocial = razaoSocial;
-		this.nomeFantasia = nomeFantasia;
-		this.cpf = cpf;
-		this.nomeCompleto = nomeCompleto;
-		this.dataNascimento = dataNascimento;
-	}
+	
 	public Integer getId() {
 		return id;
 	}
