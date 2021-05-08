@@ -1,13 +1,13 @@
-package com.hubfintech.api;
+package com.controle.contas.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TesteDesenvolvimentoHubFintechApplication {
+public class SistemaControleContasApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TesteDesenvolvimentoHubFintechApplication.class, args);
+		SpringApplication.run(SistemaControleContasApplication.class, args);
 	}
 
 }
